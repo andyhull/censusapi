@@ -1,5 +1,4 @@
 import os
-from database import engine, db_session, init_db
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 from flask_sqlalchemy import SQLAlchemy
 
@@ -10,17 +9,9 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
-@app.teardown_request
-def shutdown_session(exception=None):
-    db_session.remove()
-
 @app.route('/')
-def index():
-    # cur = db_session.execute('select phone, buddy from numbers order by id desc')
-    # cur = Numbers.query.all()
-    # app.logger.debug('All numbers: %s' % (cur))
-
-    return render_template('show_entries.html')
+def hello():
+    return 'Hello World!'
 
 if __name__ == '__main__':
     init_db()
